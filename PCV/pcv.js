@@ -63,11 +63,11 @@ const matriz = [
  */
 
 let variaveis = [
-  { x1: { x12: 0 ,  x13: 0 ,  x14: 0 ,  x15: 0 } },
-  { x2: { x22: 0 ,  x23: 0 ,  x24: 0 ,  x25: 0 } },
-  { x3: { x32: 0 ,  x33: 0 ,  x34: 0 ,  x35: 0 } },
-  { x4: { x42: 0 ,  x43: 0 ,  x44: 0 ,  x45: 0 } },
-  { x5: { x52: 0 ,  x53: 0 ,  x54: 0 ,  x55: 0 } },
+  { x1: { x12: 0, x13: 0, x14: 0, x15: 0 } },
+  { x2: { x21: 0, x23: 0, x24: 0, x25: 0 } },
+  { x3: { x31: 0, x32: 0, x34: 0, x35: 0 } },
+  { x4: { x41: 0, x42: 0, x43: 0, x45: 0 } },
+  { x5: { x51: 0, x52: 0, x53: 0, x54: 0 } },
 ];
 // console.log('vars',variaveis[0]['x1']);
 // variaveis.forEach((variavel, index) => {
@@ -94,26 +94,89 @@ let expressaoZMin =
   matriz[0].para.GovValadares * variaveis[0].x1.x12 +
   matriz[0].para.JuizDeFora * variaveis[0].x1.x13 +
   matriz[0].para.MontesClaros * variaveis[0].x1.x14 +
-  matriz[0].para.Uberlandia * variaveis[0].x1.x15
-  matriz[1].para.BeloHorizonte * variaveis[0].x2.x22 +
+  matriz[0].para.Uberlandia * variaveis[0].x1.x15;
+matriz[1].para.BeloHorizonte * variaveis[0].x2.x21 +
   matriz[1].para.JuizDeFora * variaveis[0].x2.x23 +
   matriz[1].para.MontesClaros * variaveis[0].x2.x24 +
-  matriz[1].para.Uberlandia * variaveis[0].x2.x25
-  matriz[2].para.BeloHorizonte * variaveis[0].x3.x32 +
-  matriz[2].para.GovValadares * variaveis[0].x3.x33 +
+  matriz[1].para.Uberlandia * variaveis[0].x2.x25 +
+  matriz[2].para.BeloHorizonte * variaveis[0].x3.x31 +
+  matriz[2].para.GovValadares * variaveis[0].x3.x32 +
   matriz[2].para.MontesClaros * variaveis[0].x3.x34 +
-  matriz[2].para.Uberlandia * variaveis[0].x3.x35
-  matriz[3].para.BeloHorizonte * variaveis[0].x4.x42 +
-  matriz[3].para.GovValadares * variaveis[0].x4.x43 +
-  matriz[3].para.JuizDeFora * variaveis[0].x4.x44 +
-  matriz[3].para.Uberlandia * variaveis[0].x4.x45
-  matriz[4].para.BeloHorizonte * variaveis[0].x5.x52 +
-  matriz[4].para.GovValadares * variaveis[0].x5.x53 +
-  matriz[4].para.JuizDeFora * variaveis[0].x5.x54 +
-  matriz[4].para.MontesClaros * variaveis[0].x5.x55
+  matriz[2].para.Uberlandia * variaveis[0].x3.x35;
+matriz[3].para.BeloHorizonte * variaveis[0].x4.x41 +
+  matriz[3].para.GovValadares * variaveis[0].x4.x42 +
+  matriz[3].para.JuizDeFora * variaveis[0].x4.x43 +
+  matriz[3].para.Uberlandia * variaveis[0].x4.x45;
+matriz[4].para.BeloHorizonte * variaveis[0].x5.x51 +
+  matriz[4].para.GovValadares * variaveis[0].x5.x52 +
+  matriz[4].para.JuizDeFora * variaveis[0].x5.x53 +
+  matriz[4].para.MontesClaros * variaveis[0].x5.x54;
 
-console.log("exp",expressaoZMin);
+const restricoesSaida =
+  variaveis[0].x1.x12 +
+    variaveis[0].x1.x13 +
+    variaveis[0].x1.x14 +
+    variaveis[0].x1.x15 ===
+    1 &&
+  variaveis[0].x2.x21 +
+    variaveis[0].x2.x23 +
+    variaveis[0].x2.x24 +
+    variaveis[0].x2.x25 ===
+    1 &&
+  variaveis[0].x3.x31 +
+    variaveis[0].x3.x32 +
+    variaveis[0].x3.x34 +
+    variaveis[0].x3.x35 ===
+    1 &&
+  variaveis[0].x4.x41 +
+    variaveis[0].x4.x42 +
+    variaveis[0].x4.x43 +
+    variaveis[0].x4.x45 ===
+    1 &&
+  variaveis[0].x5.x51 +
+    variaveis[0].x5.x52 +
+    variaveis[0].x5.x53 +
+    variaveis[0].x5.x54 ===
+    1;
 
-// matriz.forEach((cidade,index)=> {
-//     expressaoZMin += ;
-// })
+const restricoesChegada =
+  variaveis[0].x2.x21 +
+    variaveis[0].x3.x31 +
+    variaveis[0].x4.x41 +
+    variaveis[0].x5.x51 ===
+    1 &&
+  variaveis[0].x1.x12 +
+    variaveis[0].x3.x32 +
+    variaveis[0].x4.x42 +
+    variaveis[0].x5.x52 ===
+    1 &&
+  variaveis[0].x1.x13 +
+    variaveis[0].x2.x23 +
+    variaveis[0].x4.x43 +
+    variaveis[0].x5.x53 ===
+    1 &&
+  variaveis[0].x1.x14 +
+    variaveis[0].x2.x24 +
+    variaveis[0].x3.x34 +
+    variaveis[0].x5.x54 ===
+    1 &&
+  variaveis[0].x1.x15 +
+    variaveis[0].x2.x25 +
+    variaveis[0].x3.x35 +
+    variaveis[0].x4.x45 ===
+    1;
+
+const restricoesCiclos2Cidades =
+  variaveis[0].x1.x12 + variaveis[0].x2.x21 <= 1 &&
+  variaveis[0].x1.x13 + variaveis[0].x3.x31 <= 1 &&
+  variaveis[0].x1.x14 + variaveis[0].x4.x41 <= 1 &&
+  variaveis[0].x1.x15 + variaveis[0].x5.x51 <= 1 &&
+  variaveis[0].x2.x23 + variaveis[0].x3.x32 <= 1 && 
+  variaveis[0].x2.x24 + variaveis[0].x4.x42 <= 1 && 
+  variaveis[0].x2.x25 + variaveis[0].x5.x52 <= 1 &&
+  variaveis[0].x3.x34 + variaveis[0].x4.x43 <= 1 &&
+  variaveis[0].x3.x35 + variaveis[0].x5.x53 <= 1 &&
+  variaveis[0].x4.x45 + variaveis[0].x5.x54 <= 1; 
+
+
+console.log("exp", expressaoZMin);
