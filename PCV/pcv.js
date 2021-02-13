@@ -51,16 +51,6 @@ const matriz = [
     },
   },
 ];
-/**
- * 
-{ x16: 0 }
-
-{ x26: 0 }
-
-{ x36: 0 }
-
-
- */
 
 let variaveis = [
   { x1: { x12: 0, x13: 0, x14: 0, x15: 0 } },
@@ -178,5 +168,43 @@ const restricoesCiclos2Cidades =
   variaveis[0].x3.x35 + variaveis[0].x5.x53 <= 1 &&
   variaveis[0].x4.x45 + variaveis[0].x5.x54 <= 1; 
 
+  const restricoesCiclos3Cidades =
+    variaveis[0].x1.x12 + variaveis[0].x2.x23 + variaveis[0].x3.x31 <= 2 &&
+    variaveis[0].x1.x12 + variaveis[0].x2.x24 + variaveis[0].x4.x41 <= 2 &&
+    variaveis[0].x1.x12 + variaveis[0].x2.x25 + variaveis[0].x5.x51 <= 2 &&
+    variaveis[0].x1.x13 + variaveis[0].x3.x34 + variaveis[0].x4.x41 <= 2 &&
+    variaveis[0].x1.x13 + variaveis[0].x3.x35 + variaveis[0].x5.x51 <= 2 &&
+    variaveis[0].x1.x14 + variaveis[0].x4.x45 + variaveis[0].x5.x51 <= 2 &&
+    variaveis[0].x2.x23 + variaveis[0].x3.x34 + variaveis[0].x4.x42 <= 2 &&
+    variaveis[0].x2.x23 + variaveis[0].x3.x35 + variaveis[0].x5.x52 <= 2 &&
+    variaveis[0].x2.x24 + variaveis[0].x4.x45 + variaveis[0].x5.x52 <= 2 &&
+    variaveis[0].x3.x34 + variaveis[0].x4.x45 + variaveis[0].x5.x53 <= 2 ;
+  
+ const restricoesCiclos4Cidades =
+   variaveis[0].x1.x12 +
+     variaveis[0].x2.x23 +
+     variaveis[0].x3.x34 +
+     variaveis[0].x4.x41 <=
+     3 &&
+   variaveis[0].x1.x12 +
+     variaveis[0].x2.x23 +
+     variaveis[0].x3.x35 +
+     variaveis[0].x5.x51 <=
+     3 &&
+   variaveis[0].x1.x12 +
+     variaveis[0].x2.x24 +
+     variaveis[0].x4.x45 +
+     variaveis[0].x5.x51 <=
+     3 &&
+   variaveis[0].x1.x13 +
+     variaveis[0].x3.x34 +
+     variaveis[0].x4.x45 +
+     variaveis[0].x5.x51 <=
+     3 &&
+   variaveis[0].x2.x23 +
+     variaveis[0].x3.x34 +
+     variaveis[0].x4.x45 +
+     variaveis[0].x5.x52 <=
+     3;
 
 console.log("exp", expressaoZMin);
