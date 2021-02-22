@@ -23,11 +23,12 @@ let termosIndependentes = [4,12,21];
 let quocientes = []
 
 const verificaSolucaoOtima = (zMin) =>{
-    return zMin.forEach(element => {
-      console.log("element",element)
-        if(element<0){ return false;}
-        return true;
-    });
+   for (let i = 0; i < zMin.length; i = i + 1) {
+     if (zMin[i] < 0) {
+       return false;
+     }
+   }
+   return true;
 }
 
 const getIndexColunaPivo = (zMin) =>{
@@ -38,7 +39,7 @@ const getIndexLinhaPivo = (indexColuna) => {
     for (const [index, element] of termosIndependentes.entries()) {
       let coeficiente = matriz[index][indexColuna];
       if(coeficiente == 0){
-        //   quocientes = [...quocientes, NaN];
+          quocientes = [...quocientes, Infinity];
       }else{
           quocientes = [...quocientes, element/coeficiente];
       }
