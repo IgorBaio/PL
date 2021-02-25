@@ -75,8 +75,7 @@ function main() {
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   ];
 
-  let f = [
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  let f = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -132,6 +131,8 @@ function main() {
     1,
     1,
     1,
+    1,
+    2,
     2,
     2,
     2,
@@ -147,7 +148,7 @@ function main() {
     3,
     3,
   ];
-  let Z = [
+  let Z = [[
     63.6,
     53.2,
     90.4,
@@ -204,33 +205,35 @@ function main() {
     0,
     0,
     0,
-  ];
-  let pos, pos0;
+  ]];
+  let pos=0, pos0=0;
   let cont = 2,
-    menor,
-    col,
-    nmenor,
-    opc,
-    div,
-    pivo,
-    lin;
+    menor=0,
+    col=0,
+    nmenor=0,
+    opc=0,
+    div=0,
+    pivo=0,
+    lin=0;
   Z.forEach((item, k) => {
     if (item === 99999) {
       pos = k;
+    }else{
+      pos=0;
     }
-    pos0 = Z[pos];
+    pos0 = Z[0][pos];
     pos = pos % 20;
     for (let j = 0; j < 20; j += 1) {
-      Z[j] = Z[j] - pos0 * v[pos][j];
+      Z[0][j] = Z[0][j] - pos0 * v[pos][j];
     }
     for (let j = 0; j < 10; j += 1) {
-      Z[j + 20] = Z[j + 20] - pos0 * A[pos][j];
-      Z[j + 20] = Z[j + 20] - pos0 * A[pos][j];
+      Z[0][j + 20] = Z[0][j + 20] - pos0 * A[pos][j];
+      Z[0][j + 20] = Z[0][j + 20] - pos0 * A[pos][j];
     }
     for (let j = 0; j < 25; j += 1) {
-      Z[j + 30] = Z[j + 30] - pos0 * f[pos][j];
+      Z[0][j + 30] = Z[0][j + 30] - pos0 * f[pos][j];
     }
-    Z[55] = Z[55] - pos0 * B[pos];
+    Z[0][55] = Z[0][55] - pos0 * B[pos];
   });
 
   for (let i = 0; i < 35; i++) {
@@ -247,7 +250,7 @@ function main() {
     console.log("\n\n");
   }
   for (let i = 0; i < 35; i++) {
-    console.log(Z[i]);
+    console.log(Z[0][i]);
     console.log("\n\n\n\n");
   }
 
@@ -255,10 +258,10 @@ function main() {
     menor = 0;
     cont = 0;
     for (let i = 0; i < 55; i++) {
-      if (Z[i] < 0) {
+      if (Z[0][i] < 0) {
         cont++;
-        if (menor > Z[i]) {
-          menor = Z[i];
+        if (menor > Z[0][i]) {
+          menor = Z[0][i];
           col = i;
         }
       }
@@ -271,7 +274,7 @@ function main() {
       for (let i = 0; i < 35; i++) {
         if (v[i][col] !== 0) {
           div = B[i] / v[i][col];
-          console.log("\n\ni=" + i + "div" + div + B[i] + "/" + v[i][col]);
+          console.log("\n\n B1 i= " + i + " div " + div + B[i] + " / "  + v[i][col]);
           if (div > 0 && nmenor < div) {
             nmenor = div;
             lin = 1;
@@ -286,7 +289,7 @@ function main() {
           col = pos - 20;
           if (A[i][col] !== 0) {
             div = B[i] / A[i][col];
-            console.log("\n\ni=" + i + "div" + div + B[i] + "/" + A[i][col]);
+            console.log("\n\n B2 i= " + i + " div " + div + B[i] + " / " + A[i][col]);
             if (div > 0 && nmenor < div) {
               nmenor = div;
               lin = i;
@@ -300,7 +303,7 @@ function main() {
           col = pos - 30;
           if (f[i][col] != 0) {
             div = B[i] / f[i][col];
-            console.log("\n\ni=" + i + "div" + div + B[i] + "/" + f[i][col]);
+            console.log("\n\n B3 i= " + i + " div " + div + B[i] + " / " + f[i][col]);
             if (div > 0 && nmenor < div) {
               nmenor = div;
               lin = i;
@@ -311,7 +314,7 @@ function main() {
       }
     }
     console.log(`cont ${cont}\n`);
-    pos0 = prompt("");
+    // pos0 = prompt("");
 
     if (opc === 1) {
       pivo = v[lin][col];
@@ -333,7 +336,7 @@ function main() {
       f[lin][i] = f[lin][i] / pivo;
     }
 
-    for (let i = 0; i < 36; i++) {
+    for (let i = 0; i < 35; i++) {
       if (opc === 1) {
         pos0 = v[lin][col];
       }
@@ -345,58 +348,76 @@ function main() {
       }
 
       for (let j = 0; j < 20; j++) {
-        v[i][j] = Z[j] - pos0 * v[lin][j];
-        // v[i][j] = Z[i][j] - pos0 * v[lin][j];
+        // if (j === 33) {
+          // }
+          // if (v === undefined || v === null) console.warn('v é und na posi', i, j)
+          // if (Z === undefined) console.warn('v é und na posi', i, j)
+          // console.warn('v', v,'i',i,'j',j);
+          // if (v[i][j] === undefined || v[i][j] === null) console.warn('v é und na posi', i, j)
+          // if (Z[0][j] === undefined) console.warn("v é und na posi", i, j);
+          // if (v[lin][j] === undefined) console.warn("v é und na posi", lin, j);
+            // (v[i][j], Z[0][j], pos0,v[lin][j], i, j, lin)
+          v[i][j] = Z[0][j] - pos0 * v[lin][j];
+        // console.warn('j',j)
+        // v[i][j] = Z[0][i][j] - pos0 * v[lin][j];
       }
 
       for (let j = 0; j < 10; j++) {
-        A[i][j + 20] = Z[j + 20] - pos0 * A[lin][j];
-        // A[i][j+20] = Z[i][j+20] - pos0 * A[lin][j];
+        A[i][j + 20] = Z[0][j + 20] - pos0 * A[lin][j];
+        // A[i][j+20] = Z[0][i][j+20] - pos0 * A[lin][j];
       }
       for (let j = 0; j < 25; j++) {
-        f[i][j + 30] = Z[j + 30] - pos0 * f[lin][j];
-        // f[i][j+30] = Z[i][j+30] - pos0 * f[lin][j];
+        f[i][j + 30] = Z[0][j + 30] - pos0 * f[lin][j];
+        // f[i][j+30] = Z[0][i][j+30] - pos0 * f[lin][j];
       }
-      // B[i][55] = Z[i][55] -pos0*B[lin][0]
-      B[i] = Z[i] - pos0 * B[lin];
+      // B[i][55] = Z[0][i][55] -pos0*B[lin][0]
+      B[i] = Z[0][i] - pos0 * B[lin];
     }
 
     for (let j = 0; j < 20; j++) {
-      Z[j] = Z[j] - pos0 * v[lin][j];
-      //Z[0][j] = Z[0][j] - pos0 * v[lin][j];
+      Z[0][j] = Z[0][j] - pos0 * v[lin][j];
+      //Z[0][0][j] = Z[0][0][j] - pos0 * v[lin][j];
     }
 
     for (let j = 0; j < 10; j++) {
-      Z[j + 20] = Z[j + 20] - pos0 * A[lin][j];
-      // Z[0][j+20] = Z[0][j+20] - pos0 * A[lin][j];
+      Z[0][j + 20] = Z[0][j + 20] - pos0 * A[lin][j];
+      // Z[0][0][j+20] = Z[0][0][j+20] - pos0 * A[lin][j];
     }
     for (let j = 0; j < 25; j++) {
-      Z[j + 30] = Z[j + 30] - pos0 * f[lin][j];
-      // Z[0][j+30] = Z[0][j+30] - pos0 * f[lin][j];
+      Z[0][j + 30] = Z[0][j + 30] - pos0 * f[lin][j];
+      // Z[0][0][j+30] = Z[0][0][j+30] - pos0 * f[lin][j];
     }
-    // B[i][55] = Z[i][55] -pos0*B[lin][0]
-    Z[55] = Z[55] - pos0 * B[lin];
+    // B[i][55] = Z[0][i][55] -pos0*B[lin][0]
+    Z[0][55] = Z[0][55] - pos0 * B[lin];
 
     console.log("Z ajustado\n\n");
 
     for(let i=0;i<35;i++){
       for(let j=0; j<20;j++){
-        console.log(`${v[i][j]} `)
+        console.log(`V ${v[i][j]} `)
       }
       for(let j=0; j<10;j++){
-        console.log(`${A[i][j]} `)
+        console.log(`A ${A[i][j]} `)
       }
       for(let j=0; j<20;j++){
-        console.log(`${f[i][j]} `)
+        console.log(`f ${f[i][j]} `)
       }
-      console.log(`${B[i][j]} `)
+      console.log(`B ${B[i]} `)
       console.log(`\n\n `)
       for(let j=0; j<56;j++){
-        console.log(`${Z[j]} `)
+        console.log(`Z ${Z[0][j]} `)
         
       }
       console.log(`\n\n\n `)
     }
 
   }
+
+  console.log('\n\n\n');
+  console.info(`Valor das matrizes\n\n`, v);
+  console.info(A);
+  console.info(f);
+  console.info(z);
+  console.info(`Termos independentes\n\n`, B);
+
 }
