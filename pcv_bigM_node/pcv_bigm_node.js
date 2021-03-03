@@ -235,21 +235,21 @@ function main() {
     for (let j = 0; j < 10; j += 1) {
       Z[0][j + 20] =
         Z[0][j + 20] - posicaoInicial * variaveisAuxiliares[posicao][j];
-      // Z[0][j + 20] = Z[0][j + 20] - posicaoInicial * variaveisAuxiliares[posicao][j];
     }
     for (let j = 0; j < 25; j += 1) {
       Z[0][j + 30] = Z[0][j + 30] - posicaoInicial * variaveisFolga[posicao][j];
     }
     Z[0][55] = Z[0][55] - posicaoInicial * termosIndependentes[posicao];
   });
+
   let imprimeMatriz = [];
 
   variaveis.forEach((v, ind) =>
     imprimeMatriz.push(
-      v +','+
-        variaveisAuxiliares[ind] +','+
-        variaveisFolga[ind] +','+
-        termosIndependentes[ind]
+      v + ',' +
+      variaveisAuxiliares[ind] + ',' +
+      variaveisFolga[ind] + ',' +
+      termosIndependentes[ind]
     )
   );
   imprimeMatriz.push(Z[0] + "");
@@ -273,6 +273,8 @@ function main() {
     }
     posicao = coluna;
     console.log("\n\tMais negativo " + menor, coluna + "\n");
+
+    //começa procurar pivo
     menorAuxPivo = 99999;
     if (posicao < 20) {
       opcao = 1;
@@ -281,12 +283,12 @@ function main() {
           divide = termosIndependentes[i] / variaveis[i][coluna];
           console.log(
             "\n\n B1 i= " +
-              i +
-              " divide " +
-              divide +
-              termosIndependentes[i] +
-              " / " +
-              variaveis[i][coluna]
+            i +
+            " divide " +
+            divide +
+            termosIndependentes[i] +
+            " / " +
+            variaveis[i][coluna]
           );
           if (divide > 0 && menorAuxPivo < divide) {
             menorAuxPivo = divide;
@@ -304,12 +306,12 @@ function main() {
             divide = termosIndependentes[i] / variaveisAuxiliares[i][coluna];
             console.log(
               "\n\n B2 i= " +
-                i +
-                " divide " +
-                divide +
-                termosIndependentes[i] +
-                " / " +
-                variaveisAuxiliares[i][coluna]
+              i +
+              " divide " +
+              divide +
+              termosIndependentes[i] +
+              " / " +
+              variaveisAuxiliares[i][coluna]
             );
             if (divide > 0 && menorAuxPivo < divide) {
               menorAuxPivo = divide;
@@ -326,12 +328,12 @@ function main() {
             divide = termosIndependentes[i] / variaveisFolga[i][coluna];
             console.log(
               "\n\n B3 i= " +
-                i +
-                " divide " +
-                divide +
-                termosIndependentes[i] +
-                " / " +
-                variaveisFolga[i][coluna]
+              i +
+              " divide " +
+              divide +
+              termosIndependentes[i] +
+              " / " +
+              variaveisFolga[i][coluna]
             );
             if (divide > 0 && menorAuxPivo < divide) {
               menorAuxPivo = divide;
@@ -345,6 +347,8 @@ function main() {
     console.log(`contador ${contador}\n`);
     // posicaoInicial = prompt("");
 
+    //declara valor do pivo, será o termo divisor de toda linha
+
     if (opcao === 1) {
       pivo = variaveis[linha][coluna];
     }
@@ -354,6 +358,7 @@ function main() {
     if (opcao === 3) {
       pivo = variaveisFolga[linha][coluna];
     }
+    
     //Divisao pelo pivo (termo divisor)
     for (let i = 0; i < 20; i++) {
       variaveis[linha][i] = variaveis[linha][i] / pivo;
@@ -412,10 +417,10 @@ function main() {
 
     variaveis.forEach((v, ind) =>
       imprimeMatriz.push(
-        v +','+
-          variaveisAuxiliares[ind] +','+
-          variaveisFolga[ind] +','+
-          termosIndependentes[ind]
+        v + ',' +
+        variaveisAuxiliares[ind] + ',' +
+        variaveisFolga[ind] + ',' +
+        termosIndependentes[ind]
       )
     );
     imprimeMatriz.push(Z[0] + "");
