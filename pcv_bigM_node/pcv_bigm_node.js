@@ -219,6 +219,7 @@ function main() {
     divide = 0,
     pivo = 0,
     linha = 0;
+
   Z.forEach((item, k) => {
     if (item === 99999) {
       posicao = k;
@@ -227,6 +228,7 @@ function main() {
     }
     posicaoInicial = Z[0][posicao];
     posicao = posicao % 20;
+    //ajuste do Z ao ter os valores de M substituidos
     for (let j = 0; j < 20; j += 1) {
       Z[0][j] = Z[0][j] - posicaoInicial * variaveis[posicao][j];
     }
@@ -244,9 +246,9 @@ function main() {
 
   variaveis.forEach((v, ind) =>
     imprimeMatriz.push(
-      v +
-        variaveisAuxiliares[ind] +
-        variaveisFolga[ind] +
+      v +','+
+        variaveisAuxiliares[ind] +','+
+        variaveisFolga[ind] +','+
         termosIndependentes[ind]
     )
   );
@@ -352,7 +354,7 @@ function main() {
     if (opcao === 3) {
       pivo = variaveisFolga[linha][coluna];
     }
-
+    //Divisao pelo pivo (termo divisor)
     for (let i = 0; i < 20; i++) {
       variaveis[linha][i] = variaveis[linha][i] / pivo;
     }
@@ -363,6 +365,7 @@ function main() {
       variaveisFolga[linha][i] = variaveisFolga[linha][i] / pivo;
     }
 
+    //seta a constante para o escalonamento
     for (let i = 0; i < 35; i++) {
       if (opcao === 1) {
         posicaoInicial = variaveis[linha][coluna];
@@ -374,10 +377,10 @@ function main() {
         posicaoInicial = variaveisFolga[linha][coluna];
       }
 
+      //faz o escolanamento
       for (let j = 0; j < 20; j++) {
         variaveis[i][j] = Z[0][j] - posicaoInicial * variaveis[linha][j];
       }
-
       for (let j = 0; j < 10; j++) {
         variaveisAuxiliares[i][j + 20] =
           Z[0][j + 20] - posicaoInicial * variaveisAuxiliares[linha][j];
@@ -390,10 +393,11 @@ function main() {
         Z[0][i] - posicaoInicial * termosIndependentes[linha];
     }
 
+
+    //ajuste do z para as matrizes escalonadas
     for (let j = 0; j < 20; j++) {
       Z[0][j] = Z[0][j] - posicaoInicial * variaveis[linha][j];
     }
-
     for (let j = 0; j < 10; j++) {
       Z[0][j + 20] =
         Z[0][j + 20] - posicaoInicial * variaveisAuxiliares[linha][j];
@@ -408,9 +412,9 @@ function main() {
 
     variaveis.forEach((v, ind) =>
       imprimeMatriz.push(
-        v +
-          variaveisAuxiliares[ind] +
-          variaveisFolga[ind] +
+        v +','+
+          variaveisAuxiliares[ind] +','+
+          variaveisFolga[ind] +','+
           termosIndependentes[ind]
       )
     );
