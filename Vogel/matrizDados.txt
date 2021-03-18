@@ -1,0 +1,26 @@
+ Belo Horizonte Gov. Valadares Juiz de Fora Montes Claros Uberlândia
+Angra dos Reis          27,65 35,40 14,95 48,60 47,50
+Belford Roxo            21,70 29,40 9,00 42,60 47,90
+Campinas                29,00 4,80 26,40 48,65 24,90
+Campos dos Goytacaz     23,80 23,10 15,15 44,30 50,00
+Cariacica               25,75 18,30 23,70 26,75 41,85
+Contagem                1,00 17,75 13,20 20,45 26,10
+Duque de Caxias         20,95 28,70 8,25 33,75 48,50
+Guarulhos               28,60 43,95 23,10 48,50 30,10
+Linhares                29,05 14,70 29,85 39,20 55,85
+Mauá                    30,60 46,25 24,25 50,60 31,65
+Niterói                 22,30 30,00 9,50 43,10 49,80
+Nova Iguaçu             22,05 29,80 9,25 42,85 47,60
+Osasco                  30,05 45,45 24,65 50,05 19,30
+Ribeirão Preto          25,80 41,20 31,50 41,05 14,00
+Rio de Janeiro          22,20 29,25 9,10 42,80 49,50
+Santo André             30,00 35,75 25,15 50,10 30,45
+São Bernardo do Campo   29,95 45,00 25,30 49,90 30,35
+São Gonçalo             22,85 29,00 9,90 43,45 50,15
+São José dos Campos     30,40 31,75 19,50 50,35 32,45
+São Paulo               29,25 24,00 23,90 49,25 29,50
+Serra                   27,20 51,00 24,40 40,95 27,40
+Sorocaba                33,60 23,55 28,50 53,35 28,85
+Uberaba                 24,00 39,40 36,50 32,90 4,90
+Vila Velha              25,45 17,60 22,80 42,45 52,90
+Vitória                 25,95 17,90 23,80 42,15 52,75
