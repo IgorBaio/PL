@@ -7,11 +7,11 @@ const cidades = [
 ];
 
 let matrizValores = [
+  [0, 1, 0, 0],
   [1, 0, 0, 0],
-  [1, 0, 0, 0],
-  [1, 0, 0, 0],
-  [1, 0, 0, 0],
-  [1, 0, 0, 0],
+  [0, 0, 0, 1],
+  [0, 1, 0, 0],
+  [0, 0, 1, 0],
 ];
 
 const matriz = [
@@ -299,433 +299,160 @@ const testaRota = () => {
     matrizValores[4]
 
   );
-  if (
-    !(
-      restricoesSaida() &&
-      restricoesChegada() &&
-      restricoesCiclos2Cidades() &&
-      restricoesCiclos3Cidades() &&
-      restricoesCiclos4Cidades()
-    )
-  ) {
-    percorreMatriz(
-      { item: 0, index: 1 },
-      { item: 1, index: 0 },
-      { item: 2, index: 0 },
-      { item: 3, index: 0 },
-      { item: 4, index: 0 }
-    );
-     shiftTest(
-       matrizValores[0],
-       matrizValores[1],
-       matrizValores[2],
-       matrizValores[3],
-       matrizValores[4]
-     );
-  }
+  // if (
+  //   !(
+  //     restricoesSaida() &&
+  //     restricoesChegada() &&
+  //     restricoesCiclos2Cidades() &&
+  //     restricoesCiclos3Cidades() &&
+  //     restricoesCiclos4Cidades()
+  //   )
+  // ) {
+  //   percorreMatriz(
+  //     { item: 0, index: 1 },
+  //     { item: 1, index: 0 },
+  //     { item: 2, index: 0 },
+  //     { item: 3, index: 0 },
+  //     { item: 4, index: 0 }
+  //   );
+  //    shiftTest(
+  //      matrizValores[0],
+  //      matrizValores[1],
+  //      matrizValores[2],
+  //      matrizValores[3],
+  //      matrizValores[4]
+  //    );
+  // }
 
-   if (
-     !(
-       restricoesSaida() &&
-       restricoesChegada() &&
-       restricoesCiclos2Cidades() &&
-       restricoesCiclos3Cidades() &&
-       restricoesCiclos4Cidades()
-     )
-   ) {
-     percorreMatriz(
-       { item: 0, index: 1 },
-       { item: 1, index: 1 },
-       { item: 2, index: 0 },
-       { item: 3, index: 0 },
-       { item: 4, index: 0 }
-     );
-      shiftTest(
-        matrizValores[0],
-        matrizValores[1],
-        matrizValores[2],
-        matrizValores[3],
-        matrizValores[4]
-      );
-   }
+  //  if (
+  //    !(
+  //      restricoesSaida() &&
+  //      restricoesChegada() &&
+  //      restricoesCiclos2Cidades() &&
+  //      restricoesCiclos3Cidades() &&
+  //      restricoesCiclos4Cidades()
+  //    )
+  //  ) {
+  //    percorreMatriz(
+  //      { item: 0, index: 1 },
+  //      { item: 1, index: 1 },
+  //      { item: 2, index: 0 },
+  //      { item: 3, index: 0 },
+  //      { item: 4, index: 0 }
+  //    );
+  //     shiftTest(
+  //       matrizValores[0],
+  //       matrizValores[1],
+  //       matrizValores[2],
+  //       matrizValores[3],
+  //       matrizValores[4]
+  //     );
+  //  }
 
-   if (
-     !(
-       restricoesSaida() &&
-       restricoesChegada() &&
-       restricoesCiclos2Cidades() &&
-       restricoesCiclos3Cidades() &&
-       restricoesCiclos4Cidades()
-     )
-   ) {
-     percorreMatriz(
-       { item: 0, index: 1 },
-       { item: 1, index: 1 },
-       { item: 2, index: 1 },
-       { item: 3, index: 0 },
-       { item: 4, index: 0 }
-     );
-      shiftTest(
-        matrizValores[0],
-        matrizValores[1],
-        matrizValores[2],
-        matrizValores[3],
-        matrizValores[4]
-      );
-   }
+  //  if (
+  //    !(
+  //      restricoesSaida() &&
+  //      restricoesChegada() &&
+  //      restricoesCiclos2Cidades() &&
+  //      restricoesCiclos3Cidades() &&
+  //      restricoesCiclos4Cidades()
+  //    )
+  //  ) {
+  //    percorreMatriz(
+  //      { item: 0, index: 1 },
+  //      { item: 1, index: 1 },
+  //      { item: 2, index: 1 },
+  //      { item: 3, index: 0 },
+  //      { item: 4, index: 0 }
+  //    );
+  //     shiftTest(
+  //       matrizValores[0],
+  //       matrizValores[1],
+  //       matrizValores[2],
+  //       matrizValores[3],
+  //       matrizValores[4]
+  //     );
+  //  }
 
-   if (
-     !(
-       restricoesSaida() &&
-       restricoesChegada() &&
-       restricoesCiclos2Cidades() &&
-       restricoesCiclos3Cidades() &&
-       restricoesCiclos4Cidades()
-     )
-   ) {
-     percorreMatriz(
-       { item: 0, index: 1 },
-       { item: 1, index: 1 },
-       { item: 2, index: 1 },
-       { item: 3, index: 1 },
-       { item: 4, index: 0 }
-     );
-      shiftTest(
-        matrizValores[0],
-        matrizValores[1],
-        matrizValores[2],
-        matrizValores[3],
-        matrizValores[4]
-      );
-   }
+  //  if (
+  //    !(
+  //      restricoesSaida() &&
+  //      restricoesChegada() &&
+  //      restricoesCiclos2Cidades() &&
+  //      restricoesCiclos3Cidades() &&
+  //      restricoesCiclos4Cidades()
+  //    )
+  //  ) {
+  //    percorreMatriz(
+  //      { item: 0, index: 1 },
+  //      { item: 1, index: 1 },
+  //      { item: 2, index: 1 },
+  //      { item: 3, index: 1 },
+  //      { item: 4, index: 0 }
+  //    );
+  //     shiftTest(
+  //       matrizValores[0],
+  //       matrizValores[1],
+  //       matrizValores[2],
+  //       matrizValores[3],
+  //       matrizValores[4]
+  //     );
+  //  }
    
-   if (
-     !(
-       restricoesSaida() &&
-       restricoesChegada() &&
-       restricoesCiclos2Cidades() &&
-       restricoesCiclos3Cidades() &&
-       restricoesCiclos4Cidades()
-     )
-   ) {
-     percorreMatriz(
-       { item: 0, index: 1 },
-       { item: 1, index: 1 },
-       { item: 2, index: 1 },
-       { item: 3, index: 1 },
-       { item: 4, index: 1 }
-     );
-      shiftTest(
-        matrizValores[0],
-        matrizValores[1],
-        matrizValores[2],
-        matrizValores[3],
-        matrizValores[4]
-      );
-   }
+  //  if (
+  //    !(
+  //      restricoesSaida() &&
+  //      restricoesChegada() &&
+  //      restricoesCiclos2Cidades() &&
+  //      restricoesCiclos3Cidades() &&
+  //      restricoesCiclos4Cidades()
+  //    )
+  //  ) {
+  //    percorreMatriz(
+  //      { item: 0, index: 1 },
+  //      { item: 1, index: 1 },
+  //      { item: 2, index: 1 },
+  //      { item: 3, index: 1 },
+  //      { item: 4, index: 1 }
+  //    );
+  //     shiftTest(
+  //       matrizValores[0],
+  //       matrizValores[1],
+  //       matrizValores[2],
+  //       matrizValores[3],
+  //       matrizValores[4]
+  //     );
+  //  }
 
-   if (
-     !(
-       restricoesSaida() &&
-       restricoesChegada() &&
-       restricoesCiclos2Cidades() &&
-       restricoesCiclos3Cidades() &&
-       restricoesCiclos4Cidades()
-     )
-   ) {
-     percorreMatriz(
-       { item: 0, index: 2 },
-       { item: 1, index: 0 },
-       { item: 2, index: 0 },
-       { item: 3, index: 0 },
-       { item: 4, index: 0 }
-     );
-      shiftTest(
-        matrizValores[0],
-        matrizValores[1],
-        matrizValores[2],
-        matrizValores[3],
-        matrizValores[4]
-      );
-   }
+  //  if (
+  //    !(
+  //      restricoesSaida() &&
+  //      restricoesChegada() &&
+  //      restricoesCiclos2Cidades() &&
+  //      restricoesCiclos3Cidades() &&
+  //      restricoesCiclos4Cidades()
+  //    )
+  //  ) {
+  //    percorreMatriz(
+  //      { item: 0, index: 2 },
+  //      { item: 1, index: 0 },
+  //      { item: 2, index: 0 },
+  //      { item: 3, index: 0 },
+  //      { item: 4, index: 0 }
+  //    );
+  //     shiftTest(
+  //       matrizValores[0],
+  //       matrizValores[1],
+  //       matrizValores[2],
+  //       matrizValores[3],
+  //       matrizValores[4]
+  //     );
+  //  }
 //
 //TODO FAzer a partir daqui
 //
 //
-   if (
-     !(
-       restricoesSaida() &&
-       restricoesChegada() &&
-       restricoesCiclos2Cidades() &&
-       restricoesCiclos3Cidades() &&
-       restricoesCiclos4Cidades()
-     )
-   ) {
-     percorreMatriz(
-       { item: 0, index: 2 },
-       { item: 1, index: 1 },
-       { item: 2, index: 0 },
-       { item: 3, index: 0 },
-       { item: 4, index: 0 }
-     );
-      shiftTest(
-        matrizValores[0],
-        matrizValores[1],
-        matrizValores[2],
-        matrizValores[3],
-        matrizValores[4]
-      );
-   }
-
-   if (
-     !(
-       restricoesSaida() &&
-       restricoesChegada() &&
-       restricoesCiclos2Cidades() &&
-       restricoesCiclos3Cidades() &&
-       restricoesCiclos4Cidades()
-     )
-   ) {
-     percorreMatriz(
-       { item: 0, index: 2 },
-       { item: 1, index: 1 },
-       { item: 2, index: 1 },
-       { item: 3, index: 0 },
-       { item: 4, index: 0 }
-     );
-      shiftTest(
-        matrizValores[0],
-        matrizValores[1],
-        matrizValores[2],
-        matrizValores[3],
-        matrizValores[4]
-      );
-   }
-
-   if (
-     !(
-       restricoesSaida() &&
-       restricoesChegada() &&
-       restricoesCiclos2Cidades() &&
-       restricoesCiclos3Cidades() &&
-       restricoesCiclos4Cidades()
-     )
-   ) {
-     percorreMatriz(
-       { item: 0, index: 2 },
-       { item: 1, index: 2 },
-       { item: 2, index: 1 },
-       { item: 3, index: 0 },
-       { item: 4, index: 0 }
-     );
-      shiftTest(
-        matrizValores[0],
-        matrizValores[1],
-        matrizValores[2],
-        matrizValores[3],
-        matrizValores[4]
-      );
-   }
-
-   if (
-     !(
-       restricoesSaida() &&
-       restricoesChegada() &&
-       restricoesCiclos2Cidades() &&
-       restricoesCiclos3Cidades() &&
-       restricoesCiclos4Cidades()
-     )
-   ) {
-     percorreMatriz(
-       { item: 0, index: 2 },
-       { item: 1, index: 0 },
-       { item: 2, index: 0 },
-       { item: 3, index: 0 },
-       { item: 4, index: 0 }
-     );
-      shiftTest(
-        matrizValores[0],
-        matrizValores[1],
-        matrizValores[2],
-        matrizValores[3],
-        matrizValores[4]
-      );
-   }
-
-   if (
-     !(
-       restricoesSaida() &&
-       restricoesChegada() &&
-       restricoesCiclos2Cidades() &&
-       restricoesCiclos3Cidades() &&
-       restricoesCiclos4Cidades()
-     )
-   ) {
-     percorreMatriz(
-       { item: 0, index: 2 },
-       { item: 1, index: 0 },
-       { item: 2, index: 0 },
-       { item: 3, index: 0 },
-       { item: 4, index: 0 }
-     );
-      shiftTest(
-        matrizValores[0],
-        matrizValores[1],
-        matrizValores[2],
-        matrizValores[3],
-        matrizValores[4]
-      );
-   }
-
-   if (
-     !(
-       restricoesSaida() &&
-       restricoesChegada() &&
-       restricoesCiclos2Cidades() &&
-       restricoesCiclos3Cidades() &&
-       restricoesCiclos4Cidades()
-     )
-   ) {
-     percorreMatriz(
-       { item: 0, index: 2 },
-       { item: 1, index: 0 },
-       { item: 2, index: 0 },
-       { item: 3, index: 0 },
-       { item: 4, index: 0 }
-     );
-      shiftTest(
-        matrizValores[0],
-        matrizValores[1],
-        matrizValores[2],
-        matrizValores[3],
-        matrizValores[4]
-      );
-   }
-
-   if (
-     !(
-       restricoesSaida() &&
-       restricoesChegada() &&
-       restricoesCiclos2Cidades() &&
-       restricoesCiclos3Cidades() &&
-       restricoesCiclos4Cidades()
-     )
-   ) {
-     percorreMatriz(
-       { item: 0, index: 2 },
-       { item: 1, index: 0 },
-       { item: 2, index: 0 },
-       { item: 3, index: 0 },
-       { item: 4, index: 0 }
-     );
-      shiftTest(
-        matrizValores[0],
-        matrizValores[1],
-        matrizValores[2],
-        matrizValores[3],
-        matrizValores[4]
-      );
-   }
-
-   if (
-     !(
-       restricoesSaida() &&
-       restricoesChegada() &&
-       restricoesCiclos2Cidades() &&
-       restricoesCiclos3Cidades() &&
-       restricoesCiclos4Cidades()
-     )
-   ) {
-     percorreMatriz(
-       { item: 0, index: 2 },
-       { item: 1, index: 0 },
-       { item: 2, index: 0 },
-       { item: 3, index: 0 },
-       { item: 4, index: 0 }
-     );
-      shiftTest(
-        matrizValores[0],
-        matrizValores[1],
-        matrizValores[2],
-        matrizValores[3],
-        matrizValores[4]
-      );
-   }
-
-   if (
-     !(
-       restricoesSaida() &&
-       restricoesChegada() &&
-       restricoesCiclos2Cidades() &&
-       restricoesCiclos3Cidades() &&
-       restricoesCiclos4Cidades()
-     )
-   ) {
-     percorreMatriz(
-       { item: 0, index: 2 },
-       { item: 1, index: 0 },
-       { item: 2, index: 0 },
-       { item: 3, index: 0 },
-       { item: 4, index: 0 }
-     );
-      shiftTest(
-        matrizValores[0],
-        matrizValores[1],
-        matrizValores[2],
-        matrizValores[3],
-        matrizValores[4]
-      );
-   }
-
-   if (
-     !(
-       restricoesSaida() &&
-       restricoesChegada() &&
-       restricoesCiclos2Cidades() &&
-       restricoesCiclos3Cidades() &&
-       restricoesCiclos4Cidades()
-     )
-   ) {
-     percorreMatriz(
-       { item: 0, index: 2 },
-       { item: 1, index: 0 },
-       { item: 2, index: 0 },
-       { item: 3, index: 0 },
-       { item: 4, index: 0 }
-     );
-      shiftTest(
-        matrizValores[0],
-        matrizValores[1],
-        matrizValores[2],
-        matrizValores[3],
-        matrizValores[4]
-      );
-   }
-
-   if (
-     !(
-       restricoesSaida() &&
-       restricoesChegada() &&
-       restricoesCiclos2Cidades() &&
-       restricoesCiclos3Cidades() &&
-       restricoesCiclos4Cidades()
-     )
-   ) {
-     percorreMatriz(
-       { item: 0, index: 2 },
-       { item: 1, index: 0 },
-       { item: 2, index: 0 },
-       { item: 3, index: 0 },
-       { item: 4, index: 0 }
-     );
-      shiftTest(
-        matrizValores[0],
-        matrizValores[1],
-        matrizValores[2],
-        matrizValores[3],
-        matrizValores[4]
-      );
-   }
+ 
   //   console.log("teste expZ", expressaoZMin());
   //  console.log("teste rest", restricoesSaida());
   //  console.log("teste chega", restricoesChegada());
