@@ -98,9 +98,6 @@ let totalTransported = [0, 0, 0, 0, 0];
 
 const ofertaArray = [289, 335, 1087, 319, 268, 314, 812, 1253, 276, 345, 482, 831, 630, 833, 1461, 962, 605, 829, 572, 1959, 481, 333, 998, 390, 251];
 
-//TODO cada item é a soma de cada linha da matrixTransported 
-let transported = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-
 let matrixBestAltPenToTransport = [
     [14.95, 27.65, 12.7],
     [9, 21.7, 12.7],
@@ -142,27 +139,17 @@ let matrixAltBestPenTransported = [
 let arrayAux = []
 let arrayAux2 = []
 let arrayAux3MelhoresValores = []
-//de grao em grao a galinha enche o papo
-let arrayAux4Galinha = []
+//responsavel por ir atualizando e testando se a linha do menor valor ja foi alterada
+let arrayAux4GetMenoresValores = []
 let indexLinha, menorValor, penalidade, ofertaItem, penalidade2, indexColuna, menorValor2, samePenalitiesSecondCase
-let i1 = 0, i2 = 0, i3 = 0, i4 = 0, i5 = 0
-
-const recalculaPenalidade = (matrix, linha) => {
-    console.log('linha', linha)
-    // console.log('matrixAux', matrixAux)
-    let menorValorLinha = 0, segundoMenorValorLinha = 0, diff = 0;
-    menorValorLinha = matrixAux[linha].reduce(function (a, b) {
-        return Math.min(a, b);
-    });
-
-    segundoMenorValorLinha = Math.min.apply(null, matrixAux[linha].filter(n => n != menorValorLinha));
-    diff = segundoMenorValorLinha - menorValorLinha;
-    matrix[linha] = [menorValorLinha, segundoMenorValorLinha, diff]
-    console.log('matriz modificada', matrix)
-}
+let jaPassou0 = false
+let jaPassou1 = false
+let jaPassou2 = false
+let jaPassou3 = false
+let jaPassou4 = false
+let indexMin;
 
 const indexFromMinValue = () => {
-    console.log(matrixToTransport[indexLinha])
     const minValue = matrixToTransport[indexLinha].reduce(function (a, b) {
         return Math.min(a, b);
     });
@@ -174,22 +161,16 @@ const indexFromMinValue = () => {
     return indexesArray.filter(i => i !== undefined & i !== null)[0]
 }
 
-let jaPassou0 = false
-let jaPassou1 = false
-let jaPassou2 = false
-let jaPassou3 = false
-let jaPassou4 = false
-let indexMin;
 const truck = (mode) => {
     if (mode === 1) {
         /*
             Pega o index do menor valor na linha, verifica se o somatorio da coluna é menor que o valor da demanda e caso seja,
-            verifica se ao adicionar o novo valor obedece à restirição de ser menor ou igual ao valor da demanda, se obedecer as estas duas restrições
+            verifica se ao adicionar o novo valor obedece à restrição de ser menor ou igual ao valor da demanda, se obedecer as estas duas restrições
             adiciona o valor ao campo
         */
         switch (indexMin) {
             case 0:
-                if (i1 < demanda[0] && i1 + ofertaItem <= demanda[0]) {
+                if (totalTransported[0] < demanda[0] && totalTransported[0] + ofertaItem <= demanda[0]) {
                     matrixTransported[indexLinha][indexMin] = ofertaItem
                     matrixAux[indexLinha][indexMin] = ofertaItem
                     return
@@ -200,7 +181,7 @@ const truck = (mode) => {
                 }
                 break;
             case 1:
-                if (i2 < demanda[1] && i2 + ofertaItem <= demanda[1]) {
+                if (totalTransported[1] < demanda[1] && totalTransported[1] + ofertaItem <= demanda[1]) {
                     matrixTransported[indexLinha][indexMin] = ofertaItem
                     matrixAux[indexLinha][indexMin] = ofertaItem
                     return
@@ -212,7 +193,7 @@ const truck = (mode) => {
                 }
                 break;
             case 2:
-                if (i3 < demanda[2] && i3 + ofertaItem <= demanda[2]) {
+                if (totalTransported[2] < demanda[2] && totalTransported[2] + ofertaItem <= demanda[2]) {
                     matrixTransported[indexLinha][indexMin] = ofertaItem
                     matrixAux[indexLinha][indexMin] = ofertaItem
                     return
@@ -223,7 +204,7 @@ const truck = (mode) => {
                 }
                 break;
             case 3:
-                if (i4 < demanda[3] && i4 + ofertaItem <= demanda[3]) {
+                if (totalTransported[3] < demanda[3] && totalTransported[3] + ofertaItem <= demanda[3]) {
                     matrixTransported[indexLinha][indexMin] = ofertaItem
                     matrixAux[indexLinha][indexMin] = ofertaItem
                     return
@@ -234,7 +215,7 @@ const truck = (mode) => {
                 }
                 break;
             default:
-                if (i5 < demanda[4] && i5 + ofertaItem <= demanda[4]) {
+                if (totalTransported[4] < demanda[4] && totalTransported[4] + ofertaItem <= demanda[4]) {
                     matrixTransported[indexLinha][indexMin] = ofertaItem
                     matrixAux[indexLinha][indexMin] = ofertaItem
                     return
@@ -249,38 +230,31 @@ const truck = (mode) => {
 
 
         return
-     
+
     } else {
         matrixToTransport.forEach((mTransported, index) => {
             if (mTransported[indexColuna] === menorValor2) {
-                console.log('menorValor2', menorValor2, index)
                 ofertaItem = ofertaArray.find((i, ind) => ind === index)
-                console.log('ofertaItem', ofertaItem)
                 if (matrixBestAltPenToTransport[index].some(ele => ele === 0)) {
-                    console.log(index)
-                    console.log(indexColuna)
                     matrixAux[index][indexColuna] = 99999
                     //caso de quando a penalidade vem da matriz de penalidade das 5 cidades, pega a coluna da matriz e ve se essa linha ja foi substituida,
                     // se sim, pega coloca o 99999 no menor valor e procura o proximo menor valor 
                     matrixAux.forEach((m, index) => {
-                        arrayAux4Galinha.push(m[indexColuna])
+                        arrayAux4GetMenoresValores.push(m[indexColuna])
                     })
-                    console.log(arrayAux4Galinha)
-                    menorValor2 = arrayAux4Galinha.reduce(function (a, b) {
+                    menorValor2 = arrayAux4GetMenoresValores.reduce(function (a, b) {
                         return Math.min(a, b);
                     });
-                    arrayAux4Galinha = []
+                    arrayAux4GetMenoresValores = []
                     truck(2)
 
                 } else {
 
                     matrixTransported[index][indexColuna] = ofertaItem
-                    console.log(index)
-                    console.log(indexColuna)
                     matrixAux[index][indexColuna] = ofertaItem
                     //ZERANDO A LINHA DA MATRIZ DE PENALIDADES
                     matrixBestAltPenToTransport[index] = [0, 0, 0]
-                   
+
                 }
                 return
             }
@@ -291,18 +265,16 @@ const truck = (mode) => {
 }
 
 function main() {
-    //TODO SOMAPRODUTO f = x11*x'11+x12*x'12...+x21*x'21....
     let menorValorNovo;
     for (let i = 0; i < 25; i++) {
-        i1 = 0, i2 = 0, i3 = 0, i4 = 0, i5 = 0
+        totalTransported[0] = 0, totalTransported[1] = 0, totalTransported[2] = 0, totalTransported[3] = 0, totalTransported[4] = 0
 
         matrixTransported.forEach(m => {
-            i1 += m[0];
-            i2 += m[1];
-            i3 += m[2];
-            i4 += m[3];
-            i5 += m[4];
-            // console.log(m)
+            totalTransported[0] += m[0];
+            totalTransported[1] += m[1];
+            totalTransported[2] += m[2];
+            totalTransported[3] += m[3];
+            totalTransported[4] += m[4];
 
         })
         jaPassou0 = false
@@ -314,7 +286,6 @@ function main() {
         matrixBestAltPenToTransport.forEach((m, index) => {
             arrayAux.push(m[2]);
         })
-        // console.log(arrayAux)
         penalidade = arrayAux.reduce(function (a, b) {
             return Math.max(a, b);
         });
@@ -326,16 +297,10 @@ function main() {
             return Math.max(a, b);
         });
 
-        // console.log('penalidade', penalidade)
-        // console.log('penalidade2', penalidade2)
-
         //Verifica o valor de penalidade de qual tabela será usado 
         if (penalidade > penalidade2) {
-            // console.log('entrei 1')
             matrixBestAltPenToTransport.forEach((m, index) => {
                 if (m[2] === penalidade) {
-
-
                     //Verifica se tem mais de uma linha com a mesma penalidade,
                     //se sim, insere os melhores caminhos num arrayAux, pega o menor,
                     //faz todo o processo , vai até o proximo, e repete ate acabar
@@ -352,9 +317,6 @@ function main() {
                                 menorValor = m2[0]
                                 ofertaItem = ofertaArray.find((i, ind) => ind === indexLinha)
                                 indexOferta = index
-                                // console.log('ofertaItem', ofertaItem)
-                                // console.log('indexLinha', indexLinha)
-                                // console.log('menorValor', menorValor)
                                 indexMin = indexFromMinValue()
                                 jaPassou0 = false
                                 jaPassou1 = false
@@ -364,11 +326,9 @@ function main() {
                                 truck(1);
                                 //ZERANDO A LINHA DA MATRIZ DE PENALIDADES
                                 matrixBestAltPenToTransport[index2] = [0, 0, 0]
-                                // recalculaPenalidade(matrixBestAltPenToTransport,index2)
                             }
                         })
                         arrayAux3MelhoresValores = []
-                        // console.log('aqui', menorValor, i)
                         return
                     } else {
                         //se nao tiver penalidade repetida, simplesmente executa o transporte
@@ -398,8 +358,6 @@ function main() {
 
 
         } else {
-            // console.log('entrei 2')
-
             matrixAltBestPenTransported.forEach((m, index) => {
                 if (m[2] === penalidade2) {
                     indexColuna = index
@@ -407,7 +365,6 @@ function main() {
 
                     samePenalitiesSecondCase = matrixAltBestPenTransported.filter(i => i[2] === m[2])
                     if (samePenalitiesSecondCase.length > 1) {
-                        console.log(samePenalitiesSecondCase)
                         samePenalitiesSecondCase.forEach(s => arrayAux3MelhoresValores.push(s[0]))
                         menorValorNovo = arrayAux3MelhoresValores.reduce(function (a, b) {
                             return Math.min(a, b);
@@ -419,11 +376,9 @@ function main() {
                                 menorValor2 = m2[0]
                                 ofertaItem = ofertaArray.find((i, ind) => ind === indexLinha)
                                 indexOferta = index
-                                // console.log('ofertaItem', ofertaItem)
                                 truck(2);
                                 //ZERANDO A LINHA DA MATRIZ DE PENALIDADES
                                 matrixAltBestPenTransported[index2] = [0, 0, 0]
-                                // recalculaPenalidade(matrixAltBestPenTransported,index2)
                             }
                         })
                         arrayAux3MelhoresValores = []
@@ -434,11 +389,9 @@ function main() {
                         menorValor2 = m[0]
                         ofertaItem = ofertaArray.find((i, ind) => ind === indexLinha)
                         indexOferta = index
-                        // console.log('ofertaItem', ofertaItem)
                         truck(2);
                         //ZERANDO A LINHA DA MATRIZ DE PENALIDADES
                         matrixAltBestPenTransported[index] = [0, 0, 0]
-                        // recalculaPenalidade(matrixAltBestPenTransported,index)
 
                     }
                 }
@@ -463,37 +416,34 @@ function main() {
     }
 
 
-    i1 = 0, i2 = 0, i3 = 0, i4 = 0, i5 = 0
+    totalTransported[0] = 0, totalTransported[1] = 0, totalTransported[2] = 0, totalTransported[3] = 0, totalTransported[4] = 0
 
     matrixTransported.forEach(m => {
-        i1 += m[0];
-        i2 += m[1];
-        i3 += m[2];
-        i4 += m[3];
-        i5 += m[4];
+        totalTransported[0] += m[0];
+        totalTransported[1] += m[1];
+        totalTransported[2] += m[2];
+        totalTransported[3] += m[3];
+        totalTransported[4] += m[4];
         console.log(m)
 
     })
-    console.log('i1', i1)
-    console.log('i2', i2)
-    console.log('i3', i3)
-    console.log('i4', i4)
-    console.log('i5', i5)
+    console.log('i1', totalTransported[0])
+    console.log('i2', totalTransported[1])
+    console.log('i3', totalTransported[2])
+    console.log('i4', totalTransported[3])
+    console.log('i5', totalTransported[4])
 
     let somaTotal = 0
     for (let i = 0; i < 25; i++) {
         for (let j = 0; j < 5; j++) {
+            //SOMAPRODUTO
             somaTotal += matrixToTransport[i][j] * matrixTransported[i][j]
         }
     }
 
-    console.log('VALOR SOMA PRODUTO', i1 + i2 + i3 + i4 + i5)
+    console.log('VALOR SOMA PRODUTO', totalTransported[0] + totalTransported[1] + totalTransported[2] + totalTransported[3] + totalTransported[4])
     console.log('VALOR SOMA PRODUTO TOTAL', somaTotal)
     console.log('encerrei')
-    // console.log(matrixToTransport)
-    // console.log(demanda)
-    // console.log(totalTransported)
-    // console.log(oferta)
-    // console.log(transported)
+    
 
 }
