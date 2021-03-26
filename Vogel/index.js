@@ -145,35 +145,124 @@ let arrayAux3MelhoresValores = []
 //de grao em grao a galinha enche o papo
 let arrayAux4Galinha = []
 let indexLinha, menorValor, penalidade, ofertaItem, penalidade2, indexColuna, menorValor2, samePenalitiesSecondCase
+let i1 = 0, i2 = 0, i3 = 0, i4 = 0, i5 = 0
 
+const recalculaPenalidade = (matrix, linha) => {
+    console.log('linha', linha)
+    // console.log('matrixAux', matrixAux)
+    let menorValorLinha = 0, segundoMenorValorLinha = 0, diff = 0;
+    menorValorLinha = matrixAux[linha].reduce(function (a, b) {
+        return Math.min(a, b);
+    });
+
+    segundoMenorValorLinha = Math.min.apply(null, matrixAux[linha].filter(n => n != menorValorLinha));
+    diff = segundoMenorValorLinha - menorValorLinha;
+    matrix[linha] = [menorValorLinha, segundoMenorValorLinha, diff]
+    console.log('matriz modificada', matrix)
+}
+
+const indexFromMinValue = () => {
+    console.log(matrixToTransport[indexLinha])
+    const minValue = matrixToTransport[indexLinha].reduce(function (a, b) {
+        return Math.min(a, b);
+    });
+    const indexesArray = matrixToTransport[indexLinha].map((i, ind) => {
+        if (i === minValue) {
+            return ind;
+        }
+    })
+    return indexesArray.filter(i => i !== undefined & i !== null)[0]
+}
+
+let jaPassou0 = false
+let jaPassou1 = false
+let jaPassou2 = false
+let jaPassou3 = false
+let jaPassou4 = false
+let indexMin;
 const truck = (mode) => {
     if (mode === 1) {
+        /*
+            Pega o index do menor valor na linha, verifica se o somatorio da coluna é menor que o valor da demanda e caso seja,
+            verifica se ao adicionar o novo valor obedece à restirição de ser menor ou igual ao valor da demanda, se obedecer as estas duas restrições
+            adiciona o valor ao campo
+        */
+        switch (indexMin) {
+            case 0:
+                if (i1 < demanda[0] && i1 + ofertaItem <= demanda[0]) {
+                    matrixTransported[indexLinha][indexMin] = ofertaItem
+                    matrixAux[indexLinha][indexMin] = ofertaItem
+                    return
+                } else if (!jaPassou1) {
+                    indexMin += 1;
+                    jaPassou0 = true
+                    truck(1)
+                }
+                break;
+            case 1:
+                if (i2 < demanda[1] && i2 + ofertaItem <= demanda[1]) {
+                    matrixTransported[indexLinha][indexMin] = ofertaItem
+                    matrixAux[indexLinha][indexMin] = ofertaItem
+                    return
+                }
+                else if (!jaPassou2) {
+                    indexMin += 1;
+                    jaPassou1 = true
+                    truck(1)
+                }
+                break;
+            case 2:
+                if (i3 < demanda[2] && i3 + ofertaItem <= demanda[2]) {
+                    matrixTransported[indexLinha][indexMin] = ofertaItem
+                    matrixAux[indexLinha][indexMin] = ofertaItem
+                    return
+                } else if (!jaPassou3) {
+                    indexMin += 1;
+                    jaPassou2 = true
+                    truck(1)
+                }
+                break;
+            case 3:
+                if (i4 < demanda[3] && i4 + ofertaItem <= demanda[3]) {
+                    matrixTransported[indexLinha][indexMin] = ofertaItem
+                    matrixAux[indexLinha][indexMin] = ofertaItem
+                    return
+                } else if (!jaPassou4) {
+                    indexMin += 1;
+                    jaPassou3 = true
+                    truck(1)
+                }
+                break;
+            default:
+                if (i5 < demanda[4] && i5 + ofertaItem <= demanda[4]) {
+                    matrixTransported[indexLinha][indexMin] = ofertaItem
+                    matrixAux[indexLinha][indexMin] = ofertaItem
+                    return
+                }
+                else if (!jaPassou0) {
+                    indexMin = 0;
+                    jaPassou4 = true
+                    truck(1)
+                }
+                break;
+        }
 
-        matrixToTransport.forEach((mTransported, index) => {
-            if (index === indexLinha) {
-                mTransported.forEach((element, indexLinhaArray) => {
-                    if (element === menorValor) {
-                        matrixTransported[index][indexLinhaArray] = ofertaItem
-                        matrixAux[index][indexLinhaArray] = ofertaItem
-                        return
-                    }
 
-                })
-            }
-        })
+        return
+     
     } else {
         matrixToTransport.forEach((mTransported, index) => {
             if (mTransported[indexColuna] === menorValor2) {
-                console.log('menorValor2',menorValor2,index)
+                console.log('menorValor2', menorValor2, index)
                 ofertaItem = ofertaArray.find((i, ind) => ind === index)
                 console.log('ofertaItem', ofertaItem)
-                console.log('matrixBestAltPenToTransport[index]',matrixBestAltPenToTransport[index])
-                if (matrixBestAltPenToTransport[index].some(ele=>ele===0)) {
+                if (matrixBestAltPenToTransport[index].some(ele => ele === 0)) {
                     console.log(index)
                     console.log(indexColuna)
-                    console.log(matrixTransported[index][indexColuna])
                     matrixAux[index][indexColuna] = 99999
-                    matrixAux.forEach((m,index)=>{
+                    //caso de quando a penalidade vem da matriz de penalidade das 5 cidades, pega a coluna da matriz e ve se essa linha ja foi substituida,
+                    // se sim, pega coloca o 99999 no menor valor e procura o proximo menor valor 
+                    matrixAux.forEach((m, index) => {
                         arrayAux4Galinha.push(m[indexColuna])
                     })
                     console.log(arrayAux4Galinha)
@@ -183,29 +272,15 @@ const truck = (mode) => {
                     arrayAux4Galinha = []
                     truck(2)
 
-
-                    // console.log('matrixAltBestPenTransported[indexColuna]',matrixAltBestPenTransported[indexColuna])
-                    // menorValor2 = matrixAltBestPenTransported[indexColuna][1]
-                    // if(matrixAltBestPenTransported[indexColuna][1] !== 0 && 
-                    //     matrixAltBestPenTransported[indexColuna][1] - matrixAltBestPenTransported[indexColuna][0] === 0){
-                    //         matrixAltBestPenTransported[indexColuna][1] = 0
-
-                    //     }
-                    // else if (matrixAltBestPenTransported[indexColuna][1] !== 0) {
-                    //     truck(2)
-
-                    // }
                 } else {
 
                     matrixTransported[index][indexColuna] = ofertaItem
                     console.log(index)
                     console.log(indexColuna)
-                    console.log(matrixTransported[index][indexColuna])
                     matrixAux[index][indexColuna] = ofertaItem
-                    // console.log(matrixBestAltPenToTransport)
+                    //ZERANDO A LINHA DA MATRIZ DE PENALIDADES
                     matrixBestAltPenToTransport[index] = [0, 0, 0]
-                    // console.log(index)
-                    // console.log(matrixBestAltPenToTransport)
+                   
                 }
                 return
             }
@@ -216,22 +291,25 @@ const truck = (mode) => {
 }
 
 function main() {
-    // console.log('matrixBestAltPenToTransport antes')
-    // matrixBestAltPenToTransport.forEach(m => {
-
-    //     console.log(m)
-
-    // })
-    // console.log('matrixAltBestPenTransported antes')
-    // matrixAltBestPenTransported.forEach(m => {
-
-    //     console.log(m)
-
-    // })
-
     //TODO SOMAPRODUTO f = x11*x'11+x12*x'12...+x21*x'21....
     let menorValorNovo;
     for (let i = 0; i < 25; i++) {
+        i1 = 0, i2 = 0, i3 = 0, i4 = 0, i5 = 0
+
+        matrixTransported.forEach(m => {
+            i1 += m[0];
+            i2 += m[1];
+            i3 += m[2];
+            i4 += m[3];
+            i5 += m[4];
+            // console.log(m)
+
+        })
+        jaPassou0 = false
+        jaPassou1 = false
+        jaPassou2 = false
+        jaPassou3 = false
+        jaPassou4 = false
 
         matrixBestAltPenToTransport.forEach((m, index) => {
             arrayAux.push(m[2]);
@@ -251,15 +329,16 @@ function main() {
         // console.log('penalidade', penalidade)
         // console.log('penalidade2', penalidade2)
 
+        //Verifica o valor de penalidade de qual tabela será usado 
         if (penalidade > penalidade2) {
             // console.log('entrei 1')
             matrixBestAltPenToTransport.forEach((m, index) => {
                 if (m[2] === penalidade) {
 
 
-                    //TODO ver se tem mais de uma linha com a mesma penalidade,
-                    //se sim, inserir os melhores caminhos num arrayAux, pegar o menor
-                    //fazer todo o processo , ir pro proximo, fazer o processo e ir pro proximo, ate acabar
+                    //Verifica se tem mais de uma linha com a mesma penalidade,
+                    //se sim, insere os melhores caminhos num arrayAux, pega o menor,
+                    //faz todo o processo , vai até o proximo, e repete ate acabar
                     const samePenalities = matrixBestAltPenToTransport.filter(i => i[2] === m[2])
                     if (samePenalities.length > 1) {
                         // console.log(samePenalities)
@@ -272,37 +351,51 @@ function main() {
                                 indexLinha = index2
                                 menorValor = m2[0]
                                 ofertaItem = ofertaArray.find((i, ind) => ind === indexLinha)
+                                indexOferta = index
                                 // console.log('ofertaItem', ofertaItem)
                                 // console.log('indexLinha', indexLinha)
                                 // console.log('menorValor', menorValor)
+                                indexMin = indexFromMinValue()
+                                jaPassou0 = false
+                                jaPassou1 = false
+                                jaPassou2 = false
+                                jaPassou3 = false
+                                jaPassou4 = false
                                 truck(1);
+                                //ZERANDO A LINHA DA MATRIZ DE PENALIDADES
                                 matrixBestAltPenToTransport[index2] = [0, 0, 0]
+                                // recalculaPenalidade(matrixBestAltPenToTransport,index2)
                             }
                         })
                         arrayAux3MelhoresValores = []
                         // console.log('aqui', menorValor, i)
                         return
                     } else {
+                        //se nao tiver penalidade repetida, simplesmente executa o transporte
                         indexLinha = index
                         menorValor = m[0]
                         ofertaItem = ofertaArray.find((i, ind) => ind === indexLinha)
                         // console.log('ofertaItem', ofertaItem)
+                        indexMin = indexFromMinValue()
+                        jaPassou0 = false
+                        jaPassou1 = false
+                        jaPassou2 = false
+                        jaPassou3 = false
+                        jaPassou4 = false
                         truck(1);
+                        //ZERANDO A LINHA DA MATRIZ DE PENALIDADES
                         matrixBestAltPenToTransport[index] = [0, 0, 0]
+                        // recalculaPenalidade(matrixBestAltPenToTransport,index)
 
                     }
 
-                    // if(m[2]===12.7){
-                    //     console.log(m[0])
-                    // }
+
                     return
                 }
             })
-            // console.log('indexLinha', indexLinha)
-            // console.log('menorValor', menorValor)
 
 
-            //ZERANDO A LINHA DA MATRIZ DE PENALIDADES
+
 
         } else {
             // console.log('entrei 2')
@@ -325,9 +418,12 @@ function main() {
                                 indexColuna = index2
                                 menorValor2 = m2[0]
                                 ofertaItem = ofertaArray.find((i, ind) => ind === indexLinha)
+                                indexOferta = index
                                 // console.log('ofertaItem', ofertaItem)
                                 truck(2);
+                                //ZERANDO A LINHA DA MATRIZ DE PENALIDADES
                                 matrixAltBestPenTransported[index2] = [0, 0, 0]
+                                // recalculaPenalidade(matrixAltBestPenTransported,index2)
                             }
                         })
                         arrayAux3MelhoresValores = []
@@ -337,33 +433,19 @@ function main() {
                         indexColuna = index
                         menorValor2 = m[0]
                         ofertaItem = ofertaArray.find((i, ind) => ind === indexLinha)
+                        indexOferta = index
                         // console.log('ofertaItem', ofertaItem)
                         truck(2);
+                        //ZERANDO A LINHA DA MATRIZ DE PENALIDADES
                         matrixAltBestPenTransported[index] = [0, 0, 0]
+                        // recalculaPenalidade(matrixAltBestPenTransported,index)
 
                     }
                 }
             })
-            // console.log('indexColuna', indexColuna)
-            // console.log('menorValor2', menorValor2)
 
 
         }
-
-
-
-        //#region 2
-        // matrixAltBestPenTransported.forEach((m, index) => {
-        //     arrayAux2.push(m[2]);
-        // })
-        // penalidade2 = arrayAux2.reduce(function (a, b) {
-        //     return Math.max(a, b);
-        // });
-
-
-
-
-        //#endregion
 
         arrayAux = []
         indexLinha = null
@@ -377,26 +459,12 @@ function main() {
         if (i == 24) {
             console.log('vou encerrar')
         }
+
     }
 
 
-    // console.log(matrixTransported)
-    // console.log('matrixBestAltPenToTransport depois')
-    // matrixBestAltPenToTransport.forEach(m => {
+    i1 = 0, i2 = 0, i3 = 0, i4 = 0, i5 = 0
 
-    //     console.log(m)
-
-    // })
-    // console.log('matrixAltBestPenTransported depois')
-    // matrixAltBestPenTransported.forEach(m => {
-
-    //     console.log(m)
-
-    // })
-    // console.log(matrixBestAltPenToTransport)
-    // console.log(matrixAltBestPenTransported)
-
-    let i1 = 0, i2 = 0, i3 = 0, i4 = 0, i5 = 0
     matrixTransported.forEach(m => {
         i1 += m[0];
         i2 += m[1];
@@ -413,13 +481,13 @@ function main() {
     console.log('i5', i5)
 
     let somaTotal = 0
-    for(let i = 0; i<25; i++){
-        for(let j = 0; j< 5;j++){
-            somaTotal += matrixToTransport[i][j]*matrixTransported[i][j]
+    for (let i = 0; i < 25; i++) {
+        for (let j = 0; j < 5; j++) {
+            somaTotal += matrixToTransport[i][j] * matrixTransported[i][j]
         }
     }
 
-    console.log('VALOR SOMA PRODUTO', i1+i2+i3+i4+i5)
+    console.log('VALOR SOMA PRODUTO', i1 + i2 + i3 + i4 + i5)
     console.log('VALOR SOMA PRODUTO TOTAL', somaTotal)
     console.log('encerrei')
     // console.log(matrixToTransport)
